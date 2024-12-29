@@ -1,0 +1,9 @@
+{
+	"name": "adw-adf-bronze",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "3afb68fa-2c4b-41fc-ad74-07cfc4499020",
+		"tenantId": "29d12ad1-5b63-46e3-ac00-8dd7ae505c93"
+	}
+}
