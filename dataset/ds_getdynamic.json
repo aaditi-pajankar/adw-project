@@ -1,0 +1,30 @@
+{
+	"name": "ds_getdynamic",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_github",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"relativeURL": {
+				"type": "String"
+			}
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "HttpServerLocation",
+				"relativeUrl": {
+					"value": "@dataset().relativeURL",
+					"type": "Expression"
+				}
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	}
+}
