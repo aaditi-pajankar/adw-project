@@ -1,0 +1,17 @@
+{
+	"name": "Create Views Gold",
+	"properties": {
+		"content": {
+			"query": "----CREATE VIEW CALENDAR---------\nCREATE view gold.calendar\nas \n\n    select * \n    from OPENROWSET(\n        BULK 'https://adwentureworksbronze.dfs.core.windows.net/silver/Calendar/',\n        FORMAT = 'PARQUET'\n    ) AS QUERY1\n\n----CREATE VIEW CUSTOMERS---------\nCREATE view gold.customers\nas \n    select * \n    from OPENROWSET(\n        BULK 'https://adwentureworksbronze.dfs.core.windows.net/silver/Customers/',\n        FORMAT = 'PARQUET'\n    ) AS QUERY2\n\n----CREATE VIEW PRODUCTS---------\nCREATE view gold.products\nas \n    select * \n    from OPENROWSET(\n        BULK 'https://adwentureworksbronze.dfs.core.windows.net/silver/Products/',\n        FORMAT = 'PARQUET'\n    ) AS QUERY3\n\n----CREATE VIEW RETURNS---------\nCREATE view gold.adw_returns\nas \n    select * \n    from OPENROWSET(\n        BULK 'https://adwentureworksbronze.dfs.core.windows.net/silver/Returns/',\n        FORMAT = 'PARQUET'\n    ) AS QUERY4\n\n----CREATE VIEW SALES---------\nCREATE view gold.sales\nas \n    select * \n    from OPENROWSET(\n        BULK 'https://adwentureworksbronze.dfs.core.windows.net/silver/Sales/',\n        FORMAT = 'PARQUET'\n    ) AS QUERY5\n\n----CREATE VIEW SUB CATEGORIES---------\nCREATE view gold.sub_categories\nas \n    select * \n    from OPENROWSET(\n        BULK 'https://adwentureworksbronze.dfs.core.windows.net/silver/Sub Categories/',\n        FORMAT = 'PARQUET'\n    ) AS QUERY6\n\n----CREATE VIEW SUB CATEGORIES---------\nCREATE view gold.territories\nas \n    select * \n    from OPENROWSET(\n        BULK 'https://adwentureworksbronze.dfs.core.windows.net/silver/Territories/',\n        FORMAT = 'PARQUET'\n    ) AS QUERY7\n    ",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "adw_database",
+				"poolName": "Built-in"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}
