@@ -575,6 +575,26 @@
 			"dependsOn": []
 		},
 		{
+			"name": "[concat(parameters('workspaceName'), '/Create External Tables')]",
+			"type": "Microsoft.Synapse/workspaces/sqlscripts",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"content": {
+					"query": "CREATE DATABASE SCOPED CREDENTIAL credit_aaditi\nWITH IDENTITY = 'Managed Identity'\n\nCREATE EXTERNAL DATA SOURCE source_silver\nwith(\n    location = 'https://adwentureworksbronze.dfs.core.windows.net/silver',\n    CREDENTIAL = credit_aaditi\n)\n\nCREATE EXTERNAL DATA SOURCE source_gold\nwith(\n    location = 'https://adwentureworksbronze.dfs.core.windows.net/gold',\n    CREDENTIAL = credit_aaditi\n)\n\ncreate external file format format_parquet\nwith(\n    format_type = PARQUET,\n    DATA_COMPRESSION = 'org.apache.hadoop.io.compress.SnappyCodec'\n)\n\n\n------CREATE EXTERNAL TABLE AS SALES---------\n\n\nCREATE EXTERNAL TABLE gold.EXT_SALES\nwith(\n    location='extsales',\n    DATA_SOURCE= source_gold,\n    FILE_FORMAT= format_parquet\n) \nas \nselect * from gold.sales\n\nselect * from gold.sales",
+					"metadata": {
+						"language": "sql"
+					},
+					"currentConnection": {
+						"databaseName": "adw_database",
+						"poolName": "Built-in"
+					},
+					"resultLimit": 5000
+				},
+				"type": "SqlQuery"
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('workspaceName'), '/Create Views Gold')]",
 			"type": "Microsoft.Synapse/workspaces/sqlscripts",
 			"apiVersion": "2019-06-01-preview",
@@ -620,10 +640,17 @@
 			"apiVersion": "2019-06-01-preview",
 			"properties": {
 				"content": {
+					"query": "select * from gold.customers",
 					"metadata": {
 						"language": "sql"
-					}
-				}
+					},
+					"currentConnection": {
+						"databaseName": "adw_database",
+						"poolName": "Built-in"
+					},
+					"resultLimit": 5000
+				},
+				"type": "SqlQuery"
 			},
 			"dependsOn": []
 		}
